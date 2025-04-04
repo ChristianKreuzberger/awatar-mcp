@@ -16,6 +16,19 @@ server.tool("add",
   })
 );
 
+server.tool("get-energy-prices",
+    {},
+    async () => {
+        const response = await fetch("https://api.awattar.de/v1/marketdata").then((response) => response.json());
+
+        return {
+            content: [
+                {type: "text", text: `Energy prices for tomorrow: ${JSON.stringify(response)}`}
+            ]
+        };
+    }
+);
+
 // Add a dynamic greeting resource
 server.resource(
   "greeting",
